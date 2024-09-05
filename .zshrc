@@ -1,0 +1,1 @@
+/home/irakin30/.zshrc
