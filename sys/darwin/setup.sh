@@ -7,7 +7,7 @@ if [ "$(id -u)" -eq 0 ]; then
 fi
 
 
-if [ "$(uname -s)" = "Darwin" ]; then
+if [ "$(uname -s)" != "Darwin" ]; then
     echo "Error: this script only supports macOS" >&2
     exit 1
 fi
