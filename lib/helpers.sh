@@ -1,24 +1,38 @@
 #!/usr/bin/env bash
 
+## Colors!
+### Why not make things pretty while printing
 
-# COLORS THAT EVERYTHING WILL USE
-RESET=$'\e[0m'
-RED=$'\e[0;31m'
-GREEN=$'\e[0;32m'
-YELLOW=$'\e[0;33m'
+RESET=$'\e[0m';
+RED=$'\e[0;31m';
+GREEN=$'\e[0;32m';
+YELLOW=$'\e[0;33m';
+
+## Helper Functions
 
 getDir() {
-    local RET=$(pwd)
-    local DIR="$(cd "$(dirname "$0")" && pwd)"   # dir of this script
-    cd $RET
-    echo $DIR
+    local RET=$(pwd);
+    local DIR="$(cd "$(dirname "$0")" && pwd)";  # dir of this script
+    cd "$RET";
+    echo "$DIR";
 }
 
+error() {
+    printf "${RED}ERROR: %s${RESET}\n" "$@" >&2;
+    exit 1;
+}
 root_guard() {
     if [ "$(id -u)" -eq 0 ]; then
-        echo "${RED}ERROR: Don't run as root.${RESET}" >&2;
-        exit 1;
+        error "Don't run as root.";
     fi
 }
 
-has() { command -v "$1" >/dev/null 2>&1; }
+macos_guard() {
+    if [ "$(uname -s)" != "Darwin" ]; then
+        error "This script only supports macOS.";
+    fi
+}
+
+has() {
+    command -v "$1" >/dev/null 2>&1 ;
+}
