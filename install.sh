@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
-[ "$(id -u)" -eq 0 ] && { echo "Don't run as root." >&2; exit 1; }
+_RET=$(pwd)
+_DIR="$(cd "$(dirname "$0")" && pwd)"   # dir of this script
 
-DIR="$(cd "$(dirname "$0")" && pwd)"   # dir of this script
-. "$DIR/lib/helpers.sh"                 # source shared functions
+source "${_DIR}/lib/helpers.sh"
+
+root_guard
 
 case "$(uname -s)" in
-  Darwin) . "$DIR/sys/darwin/setup.sh" ;;
-  Linux)  . "$DIR/sys/linux/setup.sh" ;;
+  Darwin) . "${_DIR}/lib/darwin/setup.sh" ;;
+  Linux)  . "${_DIR}/lib/linux/setup.sh" ;;
 esac
+
+cd ${_RET}
