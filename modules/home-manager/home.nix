@@ -2,6 +2,7 @@
 {
   # Let Home Manager manage itself  
   programs.home-manager.enable = true;
+  home.stateVersion = "26.11";
 
   #user config 
   home.username = "irakin";
