@@ -1,4 +1,4 @@
-{config, pkgs, ...} :
+{pkgs, ...} :
 {
   # Let Home Manager manage itself  
   programs.home-manager.enable = true;
@@ -6,7 +6,7 @@
 
   #user config 
   home.username = "irakin";
-  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/irakin/" else "/home/irakin/";
+  home.homeDirectory = "/Users/irakin";
 
   home.packages = [
     pkgs.bat 
