@@ -23,25 +23,31 @@
       home-manager,
       nixpkgs,
     }:
-    {
+
+    { 
+      # MacBook Configurations 
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .
       darwinConfigurations.Luna = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./sys/darwin/configuration.nix
-          ./sys/darwin/dock.nix
-          ./sys/darwin/packages.nix
-          ./sys/darwin/system.nix
+          ./modules/darwin/configuration.nix
+          ./modules/darwin/dock.nix
+          ./modules/darwin/packages.nix
+          ./modules/darwin/system.nix
 
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.irakin = ./sys/darwin/home.nix;
+            home-manager.users.irakin = ./modules/home-manager/home.nix; 
           }
         ];
       };
+
+      # yes I know that the correct latin is "Sol" but the name scheme works better  
+      # homeConfigurations.Sola = home-manager.lib.homeManagerConfiguration {
+      # };
     };
 }
