@@ -6,7 +6,7 @@
 
   #user config 
   home.username = "irakin";
-  home.homeDirectory = if config.isDarwin then "/Users/irakin" else "/home/irakin/";
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/irakin/" else "/home/irakin/";
 
   home.packages = [
     pkgs.bat 
