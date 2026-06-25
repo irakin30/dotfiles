@@ -11,6 +11,8 @@
   ];
 
   home.file = {
-    ".zshrc".source = "dotfiles/zshrc";
-  };
+   # ".zshrc".source = "dotfiles/zshrc";
+  }; 
+
+
 }
