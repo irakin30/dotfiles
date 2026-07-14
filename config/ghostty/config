@@ -1,0 +1,13 @@
+theme = Catppuccin Mocha
+
+auto-update = off
+
+macos-titlebar-style = tabs
+macos-option-as-alt = true
+macos-hidden = always
+macos-shortcuts = allow
+
+background-opacity = 0.9 
+background-blur = macos-glass-clear
+
+keybind = global:cmd+backquote=toggle_quick_terminal

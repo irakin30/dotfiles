@@ -20,6 +20,7 @@
       "discord"
       "crossover"
       "steam"
+      "ghostty" # my preferred terminal emulator
     ];
 
     taps = [ ];

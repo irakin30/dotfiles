@@ -10,13 +10,6 @@ YELLOW=$'\e[0;33m';
 
 ## Helper Functions
 
-getDir() {
-    local RET=$(pwd);
-    local DIR="$(cd "$(dirname "$0")" && pwd)";  # dir of this script
-    cd "$RET";
-    echo "$DIR";
-}
-
 error() {
     printf "${RED}ERROR: %s${RESET}\n" "$@" >&2;
     exit 1;

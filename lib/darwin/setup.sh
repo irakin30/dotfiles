@@ -1,22 +1,16 @@
 #!/usr/bin/env bash
 
+_ROOT_DIR="${1:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
+
+source "${_ROOT_DIR}/lib/common/helpers.sh"
+
 ## Guard Clauses
-if [ "$(id -u)" -eq 0 ]; then
-    echo "Error: don't run as root." >&2
-    exit 1
-fi
+root_guard
+macos_guard
 
+## Run dependencies
+echo "${YELLOW}Checking dependencies...${RESET}"
+. "${_ROOT_DIR}/lib/darwin/dependencies.sh" "$_ROOT_DIR"
 
-if [ "$(uname -s)" != "Darwin" ]; then
-    echo "Error: this script only supports macOS" >&2
-    exit 1
-fi
-
-_RET=$(pwd)
-_DIR=$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)
-
-echo "Checking Dependenices..."
-. "$_DIR/dependencies.sh"
-
-_DIR=$(cd .. && pwd)
-cd $_RET
+## Build and activate the flake
+. "${_ROOT_DIR}/lib/darwin/rebuild.sh" "$_ROOT_DIR"

@@ -3,8 +3,11 @@
     # Necessary for using flakes on this system.
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
-    # Enable alternative shell support in nix-darwin.
-    # programs.fish.enable = true;
+    users.users.irakin = {
+      name = "irakin";
+      home = "/Users/irakin";
+    };
+
     # Set Git commit hash for darwin-version.
     system.configurationRevision = config.rev or config.dirtyRev or null;
     
@@ -18,6 +21,9 @@
       config.allowUnfree = true;
     };
     
+    # Enable alternative shell support in nix-darwin.
+    # programs.fish.enable = true;
+
     # nix.settings.trusted-users = [ "@admin" ];  # or "irakin" specifically
     # nix.linux-builder = {
     #   enable = true; 

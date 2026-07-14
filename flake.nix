@@ -46,8 +46,11 @@
         ];
       };
 
-      # yes I know that the correct latin is "Sol" but the name scheme works better  
+      # yes I know that the correct latin is "Sol" but the name scheme works better
       # homeConfigurations.Sola = home-manager.lib.homeManagerConfiguration {
+      #   pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      #   extraSpecialArgs = { inherit inputs; };
+      #   modules = [ ./modules/home-manager/home.nix ];
       # };
     };
 }

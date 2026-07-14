@@ -1,18 +1,12 @@
 #!/usr/bin/env bash
 
-_RET=$(pwd)
-_DIR="$(cd "$(dirname ${BASH_SOURCE[0]})" && pwd)"   # dir of this script
+_ROOT_DIR="${1:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 
-source "${_DIR}/../helpers.sh"
+source "${_ROOT_DIR}/lib/common/helpers.sh"
 
 ## Guard Clauses
 root_guard
-
-if [ "$(uname -s)" != "Darwin" ]; then
-    echo "${RED}Error: this script only supports macOS${RESET}" >&2
-    exit 1
-fi
-
+macos_guard
 
 ### Check for nix & install
 ### Uses a fork of the determinate nix installer, which is easier to uninstall

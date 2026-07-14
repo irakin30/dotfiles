@@ -14,6 +14,7 @@
 
   system = {
     primaryUser = "irakin";
+    primaryUserHome = "/Users/irakin";
 
     keyboard = {
       enableKeyMapping = true;
