@@ -11,6 +11,7 @@ root_guard
 case "$(uname -s)" in
   Darwin) . "${_ROOT_DIR}/lib/darwin/setup.sh" "$_ROOT_DIR" ;;
   Linux)  . "${_ROOT_DIR}/lib/linux/setup.sh" "$_ROOT_DIR" ;;
+  *)      error "Unsupported OS: $(uname -s)" ;;
 esac
 
 cd "${_RET}"

@@ -11,7 +11,7 @@ YELLOW=$'\e[0;33m';
 ## Helper Functions
 
 error() {
-    printf "${RED}ERROR: %s${RESET}\n" "$@" >&2;
+    printf "${RED}ERROR: %s${RESET}\n" "$*" >&2;
     exit 1;
 }
 root_guard() {

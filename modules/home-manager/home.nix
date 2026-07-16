@@ -6,13 +6,11 @@ in
   home.username = "irakin";
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/irakin" else "/home/irakin";
 
-  home.packages = [
-    pkgs.bat
-    pkgs.fzf
-    pkgs.lsd
-    pkgs.zoxide
-  ] ++ lib.optionals pkgs.stdenv.isDarwin [
-    # macOS-only packages
+  home.packages = with pkgs; [
+
+  ] 
+  ++ lib.optionals pkgs.stdenv.isDarwin [
+    # macOS-only packages 
   ];
 
   home.file = { };

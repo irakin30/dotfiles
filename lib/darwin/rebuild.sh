@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 _ROOT_DIR="${1:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 

@@ -1,7 +1,23 @@
-{ 
+{ pkgs, ... }:
+{
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = [ ];
+  environment.systemPackages = with pkgs; [
+    bat 
+    fzf 
+    lsd 
+    zoxide
+    direnv
+    fastfetch
+    fd
+    neovim
+    nixd
+    nixfmt
+    ripgrep
+    shellcheck
+    starship
+    wget
+  ];
 
   # Homebrew management
   homebrew = {

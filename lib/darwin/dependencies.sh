@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 _ROOT_DIR="${1:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 
@@ -20,7 +21,8 @@ if ! has nix; then
     echo "${YELLOW}Installing nix...${RESET}"
     arch=$(uname -m | sed 's/arm64/aarch64/')
     curl -sL -o nix-installer \
-      "https://artifacts.nixos.org/nix-installer/nix-installer-${arch}-darwin"
+      "https://artifacts.nixos.org/nix-installer/nix-installer-${arch}-darwin" \
+      || error "Failed to download nix-installer"
     chmod +x nix-installer
     ./nix-installer
     rm ./nix-installer

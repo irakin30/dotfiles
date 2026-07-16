@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 ## This script runs after nix, mainly does all the linking for everything in `dotfiles/config` and `dotfiles/home`
 ## everything in `dotfiles/config` symlinks into `${XDG_CONFIG_HOME:-$HOME/.config}/`
@@ -35,18 +36,27 @@ link() {
     echo "${GREEN}linked${RESET}: $dst -> $src"
 }
 
-## Symlinks every top-level entry (files and directories, including
-## dotfiles) of src_dir into dst_dir, without recursing into them.
+## Symlinks every top-level entry of src_dir into dst_dir, without recursing into them.
+## --hide adds a leading "." to dst names, so repo sources can stay un-hidden 
+## e.g. home/zshrc -> ~/.zshrc.
 link_tree() {
+    local hide=""
+    if [ "$1" = "--hide" ]; then
+        hide=1
+        shift
+    fi 
+
     local src_dir="$1"
     local dst_dir="$2"
 
     [ -d "$src_dir" ] || return 0
     mkdir -p "$dst_dir"
 
-    local entry
+    local entry name
     while IFS= read -r -d '' entry; do
-        link "$entry" "$dst_dir/$(basename "$entry")"
+        name="$(basename "$entry")"
+        [ -n "$hide" ] && name=".${name}"
+        link "$entry" "$dst_dir/$name"
     done < <(find "$src_dir" -mindepth 1 -maxdepth 1 -print0)
 }
 
@@ -54,6 +64,6 @@ echo "${YELLOW}Linking config/ -> ${CONFIG_DST}${RESET}"
 link_tree "${_ROOT_DIR}/config" "$CONFIG_DST"
 
 echo "${YELLOW}Linking home/ -> ${HOME_DST}${RESET}"
-link_tree "${_ROOT_DIR}/home" "$HOME_DST"
+link_tree --hide "${_ROOT_DIR}/home" "$HOME_DST"
 
 echo "${GREEN}Done linking dotfiles.${RESET}"
