@@ -66,4 +66,8 @@ link_tree "${_ROOT_DIR}/config" "$CONFIG_DST"
 echo "${YELLOW}Linking home/ -> ${HOME_DST}${RESET}"
 link_tree --hide "${_ROOT_DIR}/home" "$HOME_DST"
 
+echo "${YELLOW}Linking rebuild -> ${HOME}/.local/bin/rebuild${RESET}"
+mkdir -p "$HOME/.local/bin"
+link "${_ROOT_DIR}/lib/darwin/rebuild.sh" "$HOME/.local/bin/rebuild"
+
 echo "${GREEN}Done linking dotfiles.${RESET}"

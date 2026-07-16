@@ -102,9 +102,7 @@ alias nsh='nix-shell -p'
 alias np='nix profile'
 
 # EDITOR
-alias emacs='emacs -nw'
-alias doom='~/.config/emacs/bin/doom'
-export EDITOR='emacs -nw'
+export EDITOR='nvim'
 
 add-zsh-hook zshaddhistory filter_failed_or_unknown
 

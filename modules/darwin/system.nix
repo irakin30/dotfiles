@@ -28,7 +28,6 @@
 
       screencapture = {
         include-date = true; 
-        target = "clipboard";
       }; 
 
       finder = {

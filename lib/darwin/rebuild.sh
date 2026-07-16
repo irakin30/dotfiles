@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-_ROOT_DIR="${1:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
+## Resolve the real location of this script, following symlinks, so it can be
+## symlinked onto $PATH (e.g. `ln -s .../lib/darwin/rebuild.sh /usr/local/bin/rebuild`)
+## and still find the repo root relative to itself.
+_SOURCE="${BASH_SOURCE[0]}"
+while [ -L "$_SOURCE" ]; do
+    _DIR="$(cd -P "$(dirname "$_SOURCE")" && pwd)"
+    _SOURCE="$(readlink "$_SOURCE")"
+    [[ "$_SOURCE" != /* ]] && _SOURCE="$_DIR/$_SOURCE"
+done
+_SCRIPT_DIR="$(cd -P "$(dirname "$_SOURCE")" && pwd)"
+
+_ROOT_DIR="${1:-$(cd "$_SCRIPT_DIR/../.." && pwd)}"
 
 source "${_ROOT_DIR}/lib/common/helpers.sh"
 
@@ -25,7 +36,7 @@ else
     ## directly. `nix run` fetches and runs it straight from the nix-darwin flake;
     ## after this first switch, darwin-rebuild is on PATH for every run after.
     echo "${YELLOW}darwin-rebuild not found, bootstrapping nix-darwin for the first time...${RESET}"
-    sudo --preserve-env=DOTFILES_DIR nix run "nix-darwin/master#darwin-rebuild" -- switch --flake "${_ROOT_DIR}#${HOST}" --impure
+    sudo --preserve-env=DOTFILES_DIR nix run "nix-darwin/master#darwin-rebuild" -- switch -I --flake "${_ROOT_DIR}#${HOST}" --impure
 fi
 
 echo "${GREEN}System activated.${RESET}"

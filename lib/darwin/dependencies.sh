@@ -24,8 +24,15 @@ if ! has nix; then
       "https://artifacts.nixos.org/nix-installer/nix-installer-${arch}-darwin" \
       || error "Failed to download nix-installer"
     chmod +x nix-installer
-    ./nix-installer
+    ./nix-installer install
     rm ./nix-installer
+
+    ## The installer only wires nix into future shells (via /etc/zshrc etc);
+    ## source its daemon profile now so this same script can go on to use nix
+    ## without the user having to restart their shell.
+    source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+
+    echo "${GREEN}Nix installed!${GREEN}"
 fi
 
 ### Check for homebrew & install
@@ -37,5 +44,6 @@ fi
 if ! has brew; then
     echo "${RED}Homebrew not found${RESET}"
     echo "${YELLOW}Installing homebrew...${RESET}"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
+    echo "${GREEN}Homebrew installed!${RESET}"
 fi
