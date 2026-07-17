@@ -10,6 +10,15 @@ This repository contains my main dotfiles for the machines I use. Feel free to l
 
 ### MacOS
 
+You need Command Line tools to install everything (including git) on macOS so you can install it with the following:
+
+```bash
+xcode-select --install
+
+```
+
+
+
 > [!WARNING]
 > Don't run the following as root.
 > I haven't tested it, nor do I really recommend it. 
@@ -23,8 +32,9 @@ cd dotfiles
 This installs nix and homebrew if they're not already present, then builds and activates the flake, symlinking everything in `config/` and `home/` into place.
 My preferred nix installer is the [Nix Community fork of the determinate installer.](https://github.com/NixOS/nix-installer)
 
-## Rebuilding
+## Rebuilding 
 
+I have a dedicated rebuild script linked to `~/.local/bin/rebuild`, so you can just run that. All of the configs are symlinked, so you can just edit them directly.
 
 ## Uninstalling
 
