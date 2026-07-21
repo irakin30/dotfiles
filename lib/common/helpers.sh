@@ -14,6 +14,7 @@ error() {
     printf "${RED}ERROR: %s${RESET}\n" "$*" >&2;
     exit 1;
 }
+
 root_guard() {
     if [ "$(id -u)" -eq 0 ]; then
         error "Don't run as root.";

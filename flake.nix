@@ -28,7 +28,7 @@
       # MacBook Configurations 
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .
-      darwinConfigurations.Luna = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.MacBook = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit inputs; };
         modules = [
           ./modules/darwin/configuration.nix

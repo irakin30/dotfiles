@@ -9,6 +9,9 @@
         app = "/Applications/Discord.app";
       }
       {
+        app = "/Applications/Ghostty.app";
+      }
+      {
         app = "/System/Cryptexes/App/System/Applications/Safari.app";
       }
       {

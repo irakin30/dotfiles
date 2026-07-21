@@ -21,7 +21,7 @@ root_guard
 macos_guard
 
 ## Hard coded for now, since this is meant for machine configurations.
-HOST="Luna"
+HOST="MacBook"
 
 ## home.nix reads $DOTFILES_DIR (builtins.getEnv) to find lib/common/postHook.sh,
 ## since it must symlink the live checkout, not a store copy. --impure is required
@@ -36,7 +36,7 @@ else
     ## directly. `nix run` fetches and runs it straight from the nix-darwin flake;
     ## after this first switch, darwin-rebuild is on PATH for every run after.
     echo "${YELLOW}darwin-rebuild not found, bootstrapping nix-darwin for the first time...${RESET}"
-    sudo --preserve-env=DOTFILES_DIR nix run "nix-darwin/master#darwin-rebuild" -- switch -I --flake "${_ROOT_DIR}#${HOST}" --impure
+    sudo --preserve-env=DOTFILES_DIR nix run "nix-darwin/master#darwin-rebuild" -- switch --flake "${_ROOT_DIR}#${HOST}" --impure
 fi
 
 echo "${GREEN}System activated.${RESET}"

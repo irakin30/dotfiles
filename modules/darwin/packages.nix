@@ -7,7 +7,6 @@
     fzf 
     lsd 
     zoxide
-    direnv
     fastfetch
     fd
     neovim
@@ -15,7 +14,6 @@
     nixfmt
     ripgrep
     shellcheck
-    starship
     wget
   ];
 

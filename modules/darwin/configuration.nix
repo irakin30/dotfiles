@@ -21,16 +21,4 @@
       config.allowUnfree = true;
     };
     
-    # Enable alternative shell support in nix-darwin.
-    # programs.fish.enable = true;
-
-    # nix.settings.trusted-users = [ "@admin" ];  # or "irakin" specifically
-    # nix.linux-builder = {
-    #   enable = true; 
-    #   ephemeral = true;
-    #   systems = [
-    #     "x86_64-linux"
-    #     "aarch64-linux"
-    #   ];
-    # };
 }
