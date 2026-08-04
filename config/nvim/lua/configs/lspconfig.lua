@@ -23,7 +23,9 @@ local servers = {
           },
         },
       },
-      -- end nixd config 
+      -- end nixd config
+      rust_analyzer = {},
+      basedpyright = {},
 }
 
 -- read :h vim.lsp.config for changing options of lsp servers 

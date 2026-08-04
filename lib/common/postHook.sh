@@ -68,14 +68,14 @@ link_tree --hide "${_ROOT_DIR}/home" "$HOME_DST"
 
 
 if [ "$(uname -s)" = "Darwin" ]; then
+    # iCloud stuff
     echo "${YELLOW}Linking iCloud -> ${HOME}/iCloud${RESET}"
     link "$HOME/Library/Mobile Documents/com~apple~CloudDocs" "$HOME/iCloud"
+    
+    # rebuild script
+    echo "${YELLOW}Linking rebuild -> ${HOME}/.local/bin/rebuild${RESET}"
+    mkdir -p "$HOME/.local/bin"
+    link "${_ROOT_DIR}/lib/darwin/rebuild.sh" "$HOME/.local/bin/rebuild"
 fi
-
-
-echo "${YELLOW}Linking rebuild -> ${HOME}/.local/bin/rebuild${RESET}"
-mkdir -p "$HOME/.local/bin"
-link "${_ROOT_DIR}/lib/darwin/rebuild.sh" "$HOME/.local/bin/rebuild"
-
 
 echo "${GREEN}Done linking dotfiles.${RESET}"
