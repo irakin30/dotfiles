@@ -83,12 +83,8 @@ zstyle ':fzf-tab:complete:nix:*' fzf-preview '
 [[ "$word" != -* ]] && nix help ${words[2,$CURRENT-1]}
 '
 
-# Aliases [NON-TTY]
-if [[ "$TERM" != "linux" ]]; then
-    alias ls='lsd'
-fi
-
-
+alias ls='lsd'
+alias vi='nvim'
 alias vim='nvim'
 alias cat='bat --paging=always'
 
@@ -108,11 +104,3 @@ add-zsh-hook zshaddhistory filter_failed_or_unknown
 
 export PATH="$HOME/.local/bin:$PATH"
 
-update() {
-    echo "nix profile upgrade --all"
-    nix profile upgrade --all
-    echo "brew update"
-    brew update
-    echo "brew upgrade"
-    brew upgrade
-}

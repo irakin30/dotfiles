@@ -66,16 +66,10 @@ link_tree "${_ROOT_DIR}/config" "$CONFIG_DST"
 echo "${YELLOW}Linking home/ -> ${HOME_DST}${RESET}"
 link_tree --hide "${_ROOT_DIR}/home" "$HOME_DST"
 
-
-if [ "$(uname -s)" = "Darwin" ]; then
-    # iCloud stuff
-    echo "${YELLOW}Linking iCloud -> ${HOME}/iCloud${RESET}"
-    link "$HOME/Library/Mobile Documents/com~apple~CloudDocs" "$HOME/iCloud"
-    
-    # rebuild script
-    echo "${YELLOW}Linking rebuild -> ${HOME}/.local/bin/rebuild${RESET}"
-    mkdir -p "$HOME/.local/bin"
-    link "${_ROOT_DIR}/lib/darwin/rebuild.sh" "$HOME/.local/bin/rebuild"
-fi
+## OS-specific links live in lib/<os>/postHook.sh, sourced so they can reuse link().
+case "$(uname -s)" in
+  Darwin) . "${_ROOT_DIR}/lib/darwin/postHook.sh" ;;
+  Linux)  ;; # nothing linux-specific yet
+esac
 
 echo "${GREEN}Done linking dotfiles.${RESET}"

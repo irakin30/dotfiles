@@ -1,18 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-## Resolve the real location of this script, following symlinks, so it can be
-## symlinked onto $PATH (e.g. `ln -s .../lib/darwin/rebuild.sh /usr/local/bin/rebuild`)
-## and still find the repo root relative to itself.
-_SOURCE="${BASH_SOURCE[0]}"
-while [ -L "$_SOURCE" ]; do
-    _DIR="$(cd -P "$(dirname "$_SOURCE")" && pwd)"
-    _SOURCE="$(readlink "$_SOURCE")"
-    [[ "$_SOURCE" != /* ]] && _SOURCE="$_DIR/$_SOURCE"
-done
-_SCRIPT_DIR="$(cd -P "$(dirname "$_SOURCE")" && pwd)"
-
-_ROOT_DIR="${1:-$(cd "$_SCRIPT_DIR/../.." && pwd)}"
+if [ -n "${1:-}" ]; then
+    _ROOT_DIR="$1"
+else
+    ## Resolve the real location of this script, following symlinks, so it can be
+    ## symlinked onto $PATH (e.g. `ln -s .../lib/darwin/rebuild.sh /usr/local/bin/rebuild`)
+    ## and still find the repo root relative to itself. Only needed when the
+    ## caller doesn't pass the repo root as $1.
+    _SOURCE="${BASH_SOURCE[0]}"
+    while [ -L "$_SOURCE" ]; do
+        _DIR="$(cd -P "$(dirname "$_SOURCE")" && pwd)"
+        _SOURCE="$(readlink "$_SOURCE")"
+        [[ "$_SOURCE" != /* ]] && _SOURCE="$_DIR/$_SOURCE"
+    done
+    _SCRIPT_DIR="$(cd -P "$(dirname "$_SOURCE")" && pwd)"
+    _ROOT_DIR="$(cd "$_SCRIPT_DIR/../.." && pwd)"
+fi
 
 source "${_ROOT_DIR}/lib/common/helpers.sh"
 

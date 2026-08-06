@@ -27,6 +27,12 @@ macos_guard() {
     fi
 }
 
+linux_guard() {
+    if [ "$(uname -s)" != "Linux" ]; then
+        error "This script only supports Linux.";
+    fi
+}
+
 has() {
     command -v "$1" >/dev/null 2>&1 ;
 }
