@@ -18,7 +18,7 @@ in
   assertions = [
     {
       assertion = dotfilesDir != "";
-      message = "DOTFILES_DIR environment variable must be set, and darwin-rebuild must be run with --impure, so home.nix can locate lib/common/postHook.sh.";
+      message = "DOTFILES_DIR environment variable must be set, and darwin-rebuild or nixos-rebuild must be run with --impure, so home.nix can locate lib/common/postHook.sh.";
     }
   ];
 
