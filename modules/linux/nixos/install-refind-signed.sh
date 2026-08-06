@@ -2,8 +2,8 @@
 set -euo pipefail
 
 ## Runs the nixpkgs refind installer, then signs what it put on the ESP with
-## the machine's sbctl keys. The @vars@ are filled in by replaceVarsWith in
-## boot.nix -- this isn't meant to be run straight from the checkout.
+## the machine's sbctl keys. The at-sign placeholders are filled in by
+## replaceVarsWith in boot.nix -- don't run this straight from the checkout.
 
 @refindInstaller@ "$@"
 
