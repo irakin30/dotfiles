@@ -25,7 +25,7 @@ root_guard
 macos_guard
 
 ## Hard coded for now, since this is meant for machine configurations.
-HOST="MacBook"
+HOST="Luna"
 
 ## home.nix reads $DOTFILES_DIR (builtins.getEnv) to find lib/common/postHook.sh,
 ## since it must symlink the live checkout, not a store copy. --impure is required

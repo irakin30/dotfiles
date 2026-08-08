@@ -24,18 +24,20 @@
       nixpkgs,
     }:
 
-    { 
+    {
+      # ALL REBUILD SCRIPTS ARE IMPURE 
+      # DOTFILES_DIR must be set, see home.nix
+
       # MacBook Configurations 
       # Build darwin flake using:
-      # $ darwin-rebuild build --flake .
-      darwinConfigurations.MacBook = nix-darwin.lib.darwinSystem {
+      # $ darwin-rebuild build --flake .#Luna --impure 
+      darwinConfigurations.Luna = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit inputs; };
         modules = [
           ./modules/darwin/configuration.nix
-          ./modules/darwin/dock.nix
-          ./modules/darwin/packages.nix
-          ./modules/darwin/system.nix
-
+          # ./modules/darwin/dock.nix
+          # ./modules/darwin/packages.nix
+          # ./modules/darwin/system.nix 
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -47,14 +49,12 @@
       };
 
       # NixOS Configurations
-      # yes I know that the correct latin is "Sol" but the name scheme works better
-      # Build using:
-      # $ nixos-rebuild switch --flake .#Sola --impure  (DOTFILES_DIR must be set, see home.nix)
-      nixosConfigurations.Sola = nixpkgs.lib.nixosSystem {
+      # Build NixOS using:
+      # $ nixos-rebuild switch --flake .#Terra --impure 
+      nixosConfigurations.Terra = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
           ./modules/linux/nixos/configuration.nix
-
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -66,10 +66,11 @@
       };
 
       # Standalone home-manager, for linux machines that aren't NixOS
-      # (nix + home-manager on top of another distro; no system config).
+      # (nix + home-manager on top of another distro) 
+      # This is mostly going to be used for my server configs.
       # Build using:
       # $ home-manager switch --flake . --impure  (DOTFILES_DIR must be set, see home.nix)
-      homeConfigurations.irakin = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.Sola = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; };
         modules = [ ./modules/home-manager/home.nix ];
