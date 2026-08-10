@@ -57,7 +57,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.irakin = ./modules/home-manager/home.nix;
+            home-manager.users.istabr = ./modules/home-manager/home.nix;
           }
         ];
       };

@@ -28,7 +28,8 @@
   #services.desktopManager.plasma6.enable = true;
   programs.hyprland = {
     enable = true;
-    xwayland = true; 
+    withUWSM = true;
+    xwayland.enable = true; 
   }; 
   
   services.xserver = {
@@ -53,6 +54,5 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
-    media-session.enable = true;
   };
 }

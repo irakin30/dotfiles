@@ -9,9 +9,10 @@ source "${_ROOT_DIR}/lib/common/helpers.sh"
 root_guard
 linux_guard
 
+export DOTFILES_DIR=${_ROOT_DIR}
 ## "linux" means non-NixOS machines; NixOS hosts rebuild with the flake instead.
 if [ -f /etc/os-release ] && grep -q '^ID=nixos' /etc/os-release; then
-    error "This is a NixOS machine, use nixos-rebuild with the flake instead."
+    sudo --preserve-env=DOTFILES_DIR nixos-rebuild switch --flake .#Terra --impure
 fi
 
 ## Misc setup tasks go here as they come up (nothing needs installing yet).
