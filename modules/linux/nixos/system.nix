@@ -1,4 +1,4 @@
-{config, pkgs, ...}: 
+{inputs, config, pkgs, ...}: 
 
 {
   networking = {
@@ -29,9 +29,9 @@
     withUWSM = true;
     xwayland.enable = true; 
   };
-  environment.systemPackages = with pkgs; [
-    noctalia 
-    noctalia-greeter
+  
+  environment.systemPackages = [
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
   
   services.xserver = {
