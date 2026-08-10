@@ -80,7 +80,7 @@ link_tree --hide "${_ROOT_DIR}/home" "$HOME_DST"
 ## OS-specific links live in lib/<os>/postHook.sh, sourced so they can reuse link().
 case "$(uname -s)" in
   Darwin) . "${_ROOT_DIR}/lib/darwin/postHook.sh" ;;
-  Linux)  ;; # nothing linux-specific yet
+  Linux)  . "${_ROOT_DIR}/lib/linux/postHook.sh" ;;
 esac
 
 echo "${GREEN}Done linking dotfiles.${RESET}"

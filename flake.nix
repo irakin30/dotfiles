@@ -39,8 +39,8 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.irakin = ./modules/home-manager/home.nix; 
+            home-manager.extraSpecialArgs = { inherit inputs; username = "irakin"; };
+            home-manager.users.irakin = ./modules/home-manager/home.nix;
           }
         ];
       };
@@ -56,7 +56,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.extraSpecialArgs = { inherit inputs; username = "istabr"; };
             home-manager.users.istabr = ./modules/home-manager/home.nix;
           }
         ];
@@ -66,12 +66,13 @@
       # (nix + home-manager on top of another distro) 
       # This is mostly going to be used for my server configs.
       # Build using:
-      # $ home-manager switch --flake . --impure  (DOTFILES_DIR must be set, see home.nix)
+      # $ home-manager switch --flake .#Sola --impure  (DOTFILES_DIR must be set, see home.nix)
       homeConfigurations.Sola = home-manager.lib.homeManagerConfiguration {
-        ## builtins.currentSystem needs --impure, which the rebuild contract
-        ## already requires (DOTFILES_DIR) -- so Sola works on x86_64 and aarch64 alike.
+        ## builtins.currentSystem and getEnv need --impure, which the rebuild contract
+        ## already requires (DOTFILES_DIR) -- so Sola works on x86_64 and aarch64 alike,
+        ## for whatever user runs the switch.
         pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = { inherit inputs; username = builtins.getEnv "USER"; };
         modules = [ ./modules/home-manager/home.nix ];
       };
     };
