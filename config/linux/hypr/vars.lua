@@ -3,9 +3,10 @@
 ---------------------
 
 -- Set programs that you use
-local terminal    = "ghostty"
-local fileManager = "dolphin"
-local menu        = "hyprlauncher"
+-- Globals on purpose: locals are scoped to this file and would be nil
+-- in the other required files (keybindings.lua uses these).
+terminal    = "ghostty"
+fileManager = "dolphin"
 
 
 

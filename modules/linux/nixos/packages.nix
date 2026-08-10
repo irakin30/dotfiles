@@ -2,8 +2,9 @@
   environment.systemPackages = with pkgs; [
     ghostty
     neovim
-    zsh
-    kitty
+    playerctl
+    kdePackages.dolphin
+    wl-clipboard
   ];
 
   programs.firefox.enable = true;

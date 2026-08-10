@@ -5,10 +5,11 @@
     isNormalUser = true;
     description = "Istab Rakin";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
+    shell = pkgs.zsh;
   };
+
+  # Required for shell = pkgs.zsh above: makes zsh a valid login shell
+  # (/etc/shells) and sources the nix environment in it.
+  programs.zsh.enable = true;
 }
 

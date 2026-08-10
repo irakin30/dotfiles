@@ -23,16 +23,35 @@
     };
   };
 
-  services.greetd.enable = true;
+  # greetd itself is enabled by the noctalia-greeter module (packages.nix)
   programs.hyprland = {
     enable = true;
     withUWSM = true;
-    xwayland.enable = true; 
+    xwayland.enable = true;
   };
+
+  # File-chooser portal backend: xdg-desktop-portal-hyprland doesn't implement
+  # FileChooser, and its portals.conf already falls back to gtk for it.
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   
   environment.systemPackages = [
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # Screenshot tool; its wrapper bundles quickshell, grim, imagemagick,
+    # wl-clipboard, satty, and libnotify on PATH.
+    inputs.hyprquickframe.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
+
+  # Same fonts as the darwin side (modules/darwin/system.nix)
+  fonts.packages = with pkgs; [
+    nerd-fonts.symbols-only
+    nerd-fonts.jetbrains-mono
+  ];
+
+  # Removable-drive mounting for dolphin
+  services.udisks2.enable = true;
+
+  # Backs the bluetooth panel in noctalia's control center
+  hardware.bluetooth.enable = true;
   
   services.xserver = {
     enable = true;
