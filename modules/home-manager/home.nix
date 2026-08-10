@@ -3,11 +3,18 @@ let
   dotfilesDir = builtins.getEnv "DOTFILES_DIR";
 in
 {
-  home.username = "irakin";
-  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/irakin" else "/home/irakin";
+  # home.username = "irakin";
+  # home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/irakin" else "/home/irakin";
 
   home.packages = with pkgs; [
-
+    bat 
+    fzf 
+    lsd 
+    zoxide
+    fastfetch
+    fd
+    neovim
+    ripgrep 
   ] 
   ++ lib.optionals pkgs.stdenv.isDarwin [
     # macOS-only packages 

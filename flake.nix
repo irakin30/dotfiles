@@ -35,9 +35,6 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./modules/darwin/configuration.nix
-          # ./modules/darwin/dock.nix
-          # ./modules/darwin/packages.nix
-          # ./modules/darwin/system.nix 
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
