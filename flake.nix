@@ -68,7 +68,9 @@
       # Build using:
       # $ home-manager switch --flake . --impure  (DOTFILES_DIR must be set, see home.nix)
       homeConfigurations.Sola = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        ## builtins.currentSystem needs --impure, which the rebuild contract
+        ## already requires (DOTFILES_DIR) -- so Sola works on x86_64 and aarch64 alike.
+        pkgs = nixpkgs.legacyPackages.${builtins.currentSystem};
         extraSpecialArgs = { inherit inputs; };
         modules = [ ./modules/home-manager/home.nix ];
       };

@@ -2,7 +2,8 @@
 set -euo pipefail
 
 ## This script runs after nix, mainly does all the linking for everything in `dotfiles/config` and `dotfiles/home`
-## everything in `dotfiles/config` symlinks into `${XDG_CONFIG_HOME:-$HOME/.config}/`
+## `dotfiles/config` is tiered: `config/common` symlinks into `${XDG_CONFIG_HOME:-$HOME/.config}/`
+## on every OS, then `config/darwin` or `config/linux` on top for the current OS
 ## everything in `dotfiles/home` symlinks into `$HOME/`
 
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"   # dir of this script
@@ -55,13 +56,23 @@ link_tree() {
     local entry name
     while IFS= read -r -d '' entry; do
         name="$(basename "$entry")"
+        [ "$name" = ".gitkeep" ] && continue   # placeholder to keep empty tiers in git, never linked
         [ -n "$hide" ] && name=".${name}"
         link "$entry" "$dst_dir/$name"
     done < <(find "$src_dir" -mindepth 1 -maxdepth 1 -print0)
 }
 
-echo "${YELLOW}Linking config/ -> ${CONFIG_DST}${RESET}"
-link_tree "${_ROOT_DIR}/config" "$CONFIG_DST"
+case "$(uname -s)" in
+  Darwin) _OS_TIER="darwin" ;;
+  Linux)  _OS_TIER="linux" ;;
+  *)      error "Unsupported OS: $(uname -s)" ;;
+esac
+
+echo "${YELLOW}Linking config/common -> ${CONFIG_DST}${RESET}"
+link_tree "${_ROOT_DIR}/config/common" "$CONFIG_DST"
+
+echo "${YELLOW}Linking config/${_OS_TIER} -> ${CONFIG_DST}${RESET}"
+link_tree "${_ROOT_DIR}/config/${_OS_TIER}" "$CONFIG_DST"
 
 echo "${YELLOW}Linking home/ -> ${HOME_DST}${RESET}"
 link_tree --hide "${_ROOT_DIR}/home" "$HOME_DST"

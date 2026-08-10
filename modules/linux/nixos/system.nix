@@ -2,7 +2,7 @@
 
 {
   networking = {
-    hostName = "nixos"; # Define your hostname. 
+    hostName = "Terra"; # Define your hostname. 
     networkmanager.enable = true;
   };
 
