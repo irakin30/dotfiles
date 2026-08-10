@@ -35,7 +35,9 @@
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   
   environment.systemPackages = [
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # The native shell (5.x), NOT pkgs.noctalia-shell (the old Quickshell one).
+    # From nixpkgs rather than the noctalia flake so it's a cached download.
+    pkgs.noctalia
     # Screenshot tool; its wrapper bundles quickshell, grim, imagemagick,
     # wl-clipboard, satty, and libnotify on PATH.
     inputs.hyprquickframe.packages.${pkgs.stdenv.hostPlatform.system}.default

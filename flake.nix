@@ -14,10 +14,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    noctalia = {
-      url = "github:noctalia-dev/noctalia";
-      inputs.nixpkgs.follows = "nixpkgs";     };
-
+    ## The noctalia shell + greeter packages come from nixpkgs (Hydra-built, so
+    ## they download from cache.nixos.org instead of compiling locally); this
+    ## input is only here for its NixOS module, which nixpkgs doesn't carry.
     noctalia-greeter = {
       url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,11 +30,15 @@
   };
 
   outputs =
+    ## `...` is required: nix passes every flake input to outputs, and the
+    ## inputs only referenced via `inputs.*` (noctalia, hyprquickframe, ...)
+    ## would otherwise be "unexpected argument" errors.
     inputs@{
       self,
       nix-darwin,
       home-manager,
       nixpkgs,
+      ...
     }:
 
     {

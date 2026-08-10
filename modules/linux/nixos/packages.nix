@@ -11,6 +11,9 @@
   
   programs.noctalia-greeter = {
     enable = true;
+    # Cached nixpkgs build instead of the flake's own (module default is
+    # mkDefault, so this overrides cleanly; the input only supplies the module).
+    package = pkgs.noctalia-greeter;
 
     # Optional configuration
     greeter-args = "";
