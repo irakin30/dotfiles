@@ -68,7 +68,7 @@
       nixosConfigurations.Terra = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./modules/linux/nixos/configuration.nix
+          ./modules/nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
