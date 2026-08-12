@@ -3,7 +3,7 @@
     ghostty
     neovim
     playerctl
-    kdePackages.dolphin
+    nautilus
     wl-clipboard
     nixd
     nixfmt
