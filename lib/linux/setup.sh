@@ -14,6 +14,14 @@ export DOTFILES_DIR=${_ROOT_DIR}
 ## instead (via rebuild.sh), which already runs the postHook symlinker as an
 ## activation hook.
 if [ -f /etc/os-release ] && grep -q '^ID=nixos' /etc/os-release; then
+    ## modules/nixos/hardware-configuration.nix is a tracked symlink to
+    ## /etc/nixos/hardware-configuration.nix, which is machine-generated and
+    ## not in the repo -- on a fresh install the link is broken and the flake
+    ## can't evaluate. -e follows the symlink, so it catches exactly that.
+    if [ ! -e "${_ROOT_DIR}/modules/nixos/hardware-configuration.nix" ]; then
+        echo "${YELLOW}hardware-configuration.nix link is broken, generating it...${RESET}"
+        sudo nixos-generate-config
+    fi
     . "${_ROOT_DIR}/lib/linux/rebuild.sh" "$_ROOT_DIR"
     exit 0
 fi
