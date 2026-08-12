@@ -13,3 +13,6 @@ flake.lock
 
 # Ignore macOS specific random files
 .DS_Store
+
+# Ignore Claude 
+.claude/*
