@@ -10,6 +10,7 @@
     ripgrep
     shellcheck
     wget
+    ddcutil
   ];
 
   programs.firefox.enable = true;
