@@ -5,6 +5,11 @@
     playerctl
     kdePackages.dolphin
     wl-clipboard
+    nixd
+    nixfmt
+    ripgrep
+    shellcheck
+    wget
   ];
 
   programs.firefox.enable = true;

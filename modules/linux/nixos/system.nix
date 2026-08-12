@@ -78,4 +78,9 @@
     pulse.enable = true;
     jack.enable = true;
   };
+
+  #Enable Polkit
+  security.polkit.enable = true;
+
 }
+

@@ -7,3 +7,6 @@ require("config")
 require("autostart")
 require("keybindings")
 require("windowrules")
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()

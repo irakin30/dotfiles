@@ -6,6 +6,10 @@
     description = "Istab Rakin";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
+    packages = with pkgs; [
+      discord
+      steam
+    ];
   };
 
   # Required for shell = pkgs.zsh above: makes zsh a valid login shell

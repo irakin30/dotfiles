@@ -1,4 +1,4 @@
-theme = Catppuccin Mocha
+theme = noctalia
 
 auto-update = off
 
@@ -10,4 +10,5 @@ macos-shortcuts = allow
 background-opacity = 0.9 
 background-blur = macos-glass-clear
 
+font-size = 10
 keybind = global:cmd+backquote=toggle_quick_terminal
