@@ -1,10 +1,10 @@
 # dotfiles 
 
-This repository contains my main dotfiles for the machines I use. Feel free to look at them freely and/or copy them to your liking. 
-
 > [!NOTE]
 > The macOS side of this repository is stable. 
 > The Linux side (NixOS and standalone home-manager for servers) is under active development.
+
+This repository contains my main dotfiles for the machines I use. Feel free to look at them freely and/or copy them to your liking. 
 
 ## Install Guide
 
